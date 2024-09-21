@@ -1,0 +1,74 @@
+<html><head><base href="https://websimulationfun.com/kingofthehill/"><title>Boomhauer Text Generator</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#result {
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Boomhauer Text Generator</h1>
+  <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+  <button onclick="boomhauerify()">Boomhauerify</button>
+  <div id="result"></div>
+</div>
+
+<script>
+function boomhauerify() {
+  const inputText = document.getElementById('inputText').value;
+  fetch('/api/boomhauerify', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ text: inputText }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('result').textContent = data.boomhauerText;
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+    document.getElementById('result').textContent = 'Dang ol\' error occurred, man.';
+  });
+}
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
