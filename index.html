@@ -34,9 +34,17 @@
       padding: 10px 15px;
       border-radius: 10px 10px 0 0;
       margin: -20px -20px 20px -20px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
       font-family: 'Permanent Marker', cursive;
       box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    }
+    
+    .title-icon {
+      width: 30px;
+      height: auto;
     }
     
     h1 {
@@ -136,13 +144,18 @@
       white-space: pre-wrap;
     }
     
-    .character-container {
+    .boomhauer-image {
       position: absolute;
-      bottom: -120px;
-      right: -50px;
-      height: 200px;
-      width: 150px;
-      z-index: -1;
+      right: -60px;
+      bottom: -20px;
+      width: 200px;
+      z-index: 1;
+      pointer-events: none;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover .boomhauer-image {
+      transform: scale(1.05);
     }
     
     .loading {
@@ -196,11 +209,10 @@
         padding: 15px;
       }
       
-      .boomhauer-svg {
+      .boomhauer-image {
         width: 150px;
-        height: 150px;
-        right: -50px;
-        bottom: -70px;
+        right: -40px;
+        bottom: -10px;
       }
     }
   </style>
@@ -208,7 +220,9 @@
 <body>
   <div class="container">
     <div class="title-bar">
+      <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon">
       <h1>Boomhauer Translator</h1>
+      <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon">
     </div>
     
     <div class="main-content">
@@ -238,29 +252,7 @@
       King of the Hill - Arlen, Texas
     </div>
     
-    <!-- Simplified Boomhauer character in SVG -->
-    <svg class="boomhauer-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <!-- Simplified Boomhauer head -->
-      <ellipse cx="100" cy="80" rx="50" ry="60" fill="#F5D0A9" />
-      <!-- Hair -->
-      <path d="M60 50 Q100 10 140 50" fill="#D8D8D8" stroke="#A4A4A4" stroke-width="2" />
-      <!-- Eyes -->
-      <ellipse cx="80" cy="70" rx="5" ry="3" fill="#333" />
-      <ellipse cx="120" cy="70" rx="5" ry="3" fill="#333" />
-      <!-- Nose -->
-      <path d="M100 80 Q110 95 100 95" fill="none" stroke="#A4A4A4" stroke-width="2" />
-      <!-- Mouth -->
-      <path d="M80 110 Q100 120 120 110" fill="none" stroke="#333" stroke-width="2" />
-      <!-- Ear -->
-      <path d="M150 80 Q160 90 150 100" fill="#F5D0A9" stroke="#A4A4A4" stroke-width="2" />
-      <!-- Cigarette -->
-      <rect x="120" y="105" width="25" height="3" fill="#FFF" />
-      <circle cx="145" cy="106.5" r="3" fill="#FF3300" />
-      <!-- Sunglasses -->
-      <path d="M70 70 L130 70" fill="none" stroke="#333" stroke-width="1" />
-      <!-- Shirt collar -->
-      <path d="M70 140 Q100 160 130 140" fill="#D46A6A" stroke="#333" stroke-width="2" />
-    </svg>
+    <img src="boomhauer.png" alt="Boomhauer from King of the Hill" class="boomhauer-image">
   </div>
 
   <script>
