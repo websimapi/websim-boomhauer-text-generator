@@ -209,23 +209,54 @@
     }
     
     @media (max-width: 768px) {
+      body {
+        justify-content: flex-start;
+        padding-top: 20px;
+      }
+
       .container {
         width: 95%;
         padding: 15px;
-        margin-top: 15px;
-        margin-bottom: 15px;
+      }
+
+      h1 {
+        font-size: 24px;
       }
       
       .boomhauer-image {
-        width: 120px;
-        right: -30px;
-        bottom: -15px;
+        width: 150px;
+        right: -40px;
+        bottom: -10px;
+        opacity: 0.9;
       }
 
       .container.input-focused .boomhauer-image {
-        transform: translateX(90px) scale(0.8);
-        opacity: 0.4;
+        transform: translateX(150px) scale(0.8);
+        opacity: 0.2;
       }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 20px;
+        }
+
+        .title-icon {
+            width: 25px;
+        }
+
+        textarea, #result {
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .boomhauer-image {
+            display: none;
+        }
     }
   </style>
 </head>
