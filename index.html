@@ -47,10 +47,6 @@
       height: auto;
     }
     
-    .title-icon.mirrored {
-      transform: scaleX(-1);
-    }
-    
     h1 {
       margin: 0;
       font-size: 28px;
@@ -150,22 +146,26 @@
     
     .boomhauer-image {
       position: absolute;
-      right: -35px;
-      bottom: -45px;
-      width: 220px;
+      right: -80px;
+      bottom: -40px;
+      width: 200px;
       z-index: 1;
-      pointer-events: none;
       transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-      transform: scaleX(-1); /* Mirrored */
+    }
+
+    .container:not(.input-focused) .boomhauer-image {
+      pointer-events: none;
     }
 
     .container:hover .boomhauer-image {
-      transform: scaleX(-1) scale(1.05);
+      transform: scale(1.05);
     }
     
     .container.input-focused .boomhauer-image {
-        transform: scaleX(-1) translateX(150px) scale(0.8);
+        transform: translateX(150px) scale(0.8);
         opacity: 0.4;
+        pointer-events: auto; /* allow clicking when moved */
+        cursor: pointer; /* show it's clickable */
     }
     
     .loading {
@@ -214,54 +214,16 @@
     }
     
     @media (max-width: 768px) {
-      body {
-        justify-content: flex-start;
-        padding-top: 20px;
-      }
-
       .container {
         width: 95%;
         padding: 15px;
       }
-
-      h1 {
-        font-size: 24px;
-      }
       
       .boomhauer-image {
-        width: 170px;
-        right: -30px;
-        bottom: -25px;
-        opacity: 0.9;
+        width: 150px;
+        right: -40px;
+        bottom: -20px;
       }
-
-      .container.input-focused .boomhauer-image {
-        transform: scaleX(-1) translateX(150px) scale(0.8);
-        opacity: 0.2;
-      }
-    }
-
-    @media (max-width: 480px) {
-        h1 {
-            font-size: 20px;
-        }
-
-        .title-icon {
-            width: 25px;
-        }
-
-        textarea, #result {
-            font-size: 16px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-
-        .boomhauer-image {
-            display: none;
-        }
     }
   </style>
 </head>
@@ -270,7 +232,7 @@
     <div class="title-bar">
       <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon">
       <h1>Boomhauer Translator</h1>
-      <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon mirrored">
+      <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon">
     </div>
     
     <div class="main-content">
@@ -325,9 +287,8 @@
           messages: [
             {
               role: "system",
-              content: "You are Boomhauer from King of the Hill. Translate the user's text into Boomhauer's unique speaking style. Boomhauer speaks in a heavy Southern accent, talks very fast, and uses phrases like 'dang ol', 'man', 'talkin' bout', and often trails off or mumbles. His speech is difficult to understand but contains the essence of what he's trying to say. Keep the translation to roughly the same length as the original text. Be conversational."
+              content: "You are Boomhauer from King of the Hill. Translate the user's text into Boomhauer's unique speaking style. Boomhauer speaks in a heavy Southern accent, talks very fast, and uses phrases like 'dang ol', 'man', 'talkin' bout', and often trails off or mumbles. His speech is difficult to understand but contains the essence of what he's trying to say. Keep the translation to roughly the same length as the original text."
             },
-            ...conversationHistory,
             {
               role: "user",
               content: inputText
@@ -375,6 +336,7 @@
     // Move Boomhauer when textarea is focused
     const container = document.querySelector('.container');
     const inputText = document.getElementById('inputText');
+    const boomhauerImage = document.querySelector('.boomhauer-image');
     
     inputText.addEventListener('focus', () => {
         container.classList.add('input-focused');
@@ -382,6 +344,13 @@
     
     inputText.addEventListener('blur', () => {
         container.classList.remove('input-focused');
+    });
+
+    boomhauerImage.addEventListener('click', () => {
+      if (container.classList.contains('input-focused')) {
+        container.classList.remove('input-focused');
+        inputText.blur();
+      }
     });
   </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
