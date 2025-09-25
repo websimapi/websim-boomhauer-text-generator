@@ -47,6 +47,10 @@
       height: auto;
     }
     
+    .title-icon.mirrored {
+      transform: scaleX(-1);
+    }
+    
     h1 {
       margin: 0;
       font-size: 28px;
@@ -152,14 +156,15 @@
       z-index: 1;
       pointer-events: none;
       transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      transform: scaleX(-1); /* Mirrored */
     }
 
     .container:hover .boomhauer-image {
-      transform: scale(1.05);
+      transform: scaleX(-1) scale(1.05);
     }
     
     .container.input-focused .boomhauer-image {
-        transform: translateX(150px) scale(0.8);
+        transform: scaleX(-1) translateX(150px) scale(0.8);
         opacity: 0.4;
     }
     
@@ -231,7 +236,7 @@
       }
 
       .container.input-focused .boomhauer-image {
-        transform: translateX(150px) scale(0.8);
+        transform: scaleX(-1) translateX(150px) scale(0.8);
         opacity: 0.2;
       }
     }
@@ -265,7 +270,7 @@
     <div class="title-bar">
       <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon">
       <h1>Boomhauer Translator</h1>
-      <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon">
+      <img src="alamo_beer.png" alt="Alamo beer can" class="title-icon mirrored">
     </div>
     
     <div class="main-content">
@@ -320,8 +325,9 @@
           messages: [
             {
               role: "system",
-              content: "You are Boomhauer from King of the Hill. Translate the user's text into Boomhauer's unique speaking style. Boomhauer speaks in a heavy Southern accent, talks very fast, and uses phrases like 'dang ol', 'man', 'talkin' bout', and often trails off or mumbles. His speech is difficult to understand but contains the essence of what he's trying to say. Keep the translation to roughly the same length as the original text."
+              content: "You are Boomhauer from King of the Hill. Translate the user's text into Boomhauer's unique speaking style. Boomhauer speaks in a heavy Southern accent, talks very fast, and uses phrases like 'dang ol', 'man', 'talkin' bout', and often trails off or mumbles. His speech is difficult to understand but contains the essence of what he's trying to say. Keep the translation to roughly the same length as the original text. Be conversational."
             },
+            ...conversationHistory,
             {
               role: "user",
               content: inputText
