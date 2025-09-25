@@ -212,12 +212,19 @@
       .container {
         width: 95%;
         padding: 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
       }
       
       .boomhauer-image {
-        width: 150px;
-        right: -40px;
-        bottom: -10px;
+        width: 120px;
+        right: -30px;
+        bottom: -15px;
+      }
+
+      .container.input-focused .boomhauer-image {
+        transform: translateX(90px) scale(0.8);
+        opacity: 0.4;
       }
     }
   </style>
